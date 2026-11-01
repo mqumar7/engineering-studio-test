@@ -1,0 +1,12 @@
+{
+  "schema": "engineering-studio.pages-acceptance.v1",
+  "repository": "mqumar7/engineering-studio-test",
+  "branch": "engineering/staging-acceptance",
+  "head": "4c76fdcbee87e6e30ec3cb391164c0b4947c464b",
+  "runId": "73f5402d-9655-4159-b409-40995c4e0d72",
+  "deliveryId": "71e6cb54-7837-41fb-8e48-7e69b881f5e6",
+  "assets": {
+    "index.html": "5e6ef6fec403e9cc2defbaf4b6bb000b82ab45223071bd49a88268cd904925ec"
+  },
+  "previous": null
+}
