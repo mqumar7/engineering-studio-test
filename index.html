@@ -1,0 +1,17 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>معادلة — اختبار تكامل</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,sans-serif;color:#193f3b;background:#f6f6ef;min-height:100vh;display:grid;place-items:center;padding:25px}.app{width:min(100%,550px)}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}header strong{font-size:27px}header span{border:1px solid #cadbd0;padding:7px 12px;border-radius:20px;font-size:11px;color:#41685c}main{background:white;border:1px solid #dae2d9;border-radius:22px;padding:35px;box-shadow:0 12px 35px #143a2a08}small{font-size:11px;color:#63836d}h1{font-size:31px;margin:12px 0}p{font-size:14px;line-height:1.9;color:#698074}form{margin-top:28px}.numbers{display:grid;grid-template-columns:1fr 1fr;gap:15px}label{display:block;font-size:12px;margin-bottom:8px}input,select{width:100%;font:inherit;padding:13px;border:1px solid #cddbd0;background:#fafbf7;border-radius:9px;margin-bottom:20px;min-width:0}input{direction:ltr;text-align:right}input:focus,select:focus{outline:2px solid #88ae98;outline-offset:2px}button{width:100%;background:#225b4f;color:white;border:0;padding:15px;border-radius:10px;font:inherit;cursor:pointer}output{display:block;margin-top:25px;padding:22px;background:#edf4e9;border:1px solid #d9e5d3;border-radius:12px;font-size:24px;min-height:80px;overflow-wrap:anywhere}footer{font-size:11px;line-height:1.9;color:#7c8e80;text-align:center;margin-top:22px}@media(max-width:430px){body{padding:17px}main{padding:24px}h1{font-size:27px}.numbers{gap:10px}}
+</style></head><body><div class="app"><header><strong>معادلة</strong><span>اختبار تكامل GitHub</span></header><main><small>تجربة تسليم واختبار فعلية</small><h1>حسابات بسيطة، نتيجة واضحة.</h1><p>أدخل العددين واختر العملية. تُحسب النتيجة داخل الصفحة دون اتصال بخدمة خارجية.</p><form id="calculator"><div class="numbers"><div><label for="a">العدد الأول</label><input id="a" type="number" step="any" required></div><div><label for="b">العدد الثاني</label><input id="b" type="number" step="any" required></div></div><label for="operator">العملية</label><select id="operator"><option value="+">جمع +</option><option value="-">طرح −</option><option value="*">ضرب ×</option><option value="/">قسمة ÷</option></select><button>احسب النتيجة</button></form><output id="result" role="status" aria-live="polite">النتيجة تظهر هنا</output></main><footer>Engineering Studio · نسخة محلية مثبتة على commit محدد<br>تجربة حسابية؛ لا يوجد نشر Production</footer></div><script>
+function calculate(a,b,operator){
+  if(!Number.isFinite(a)||!Number.isFinite(b))throw new Error('أدخل عددين صحيحين للاستخدام.');
+  if(operator==='/'&&b===0)throw new Error('لا يمكن القسمة على صفر');
+  let result;
+  switch(operator){case '+':result=a+b;break;case '-':result=a-b;break;case '*':result=a*b;break;case '/':result=a/b;break;default:throw new Error('عملية غير مدعومة');}
+  if(!Number.isFinite(result))throw new Error('النتيجة خارج النطاق المدعوم');
+  return result;
+}
+document.querySelector('#calculator').addEventListener('submit',event=>{
+  event.preventDefault();const output=document.querySelector('#result');
+  try{output.textContent=String(calculate(Number(document.querySelector('#a').value),Number(document.querySelector('#b').value),document.querySelector('#operator').value));}
+  catch(error){output.textContent=error.message;}
+});
+</script></body></html>
