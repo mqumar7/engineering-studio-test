@@ -1,0 +1,10 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { runInNewContext } from 'node:vm';
+const html = readFileSync(new URL('./index.html', import.meta.url), 'utf8');
+const context = { document: { querySelector: () => ({ addEventListener() {} }) } };
+runInNewContext(html.match(/<script>([\s\S]*?)<\/script>/)[1], context);
+test('four arithmetic operations', () => { assert.equal(context.calculate(7, 3, '+'), 10); assert.equal(context.calculate(7, 3, '-'), 4); assert.equal(context.calculate(7, 3, '*'), 21); assert.equal(context.calculate(9, 3, '/'), 3); });
+test('zero division is rejected', () => { assert.throws(() => context.calculate(1, 0, '/'), /صفر/); });
+test('invalid numbers and overflow are rejected', () => { assert.throws(() => context.calculate(NaN, 1, '+')); assert.throws(() => context.calculate(1e308, 1e308, '*')); });
